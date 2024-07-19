@@ -1,6 +1,6 @@
-* pdf-rag version:
-* Python version:
-* Operating System:
+* pdf-rag version: 0.0.1
+* Python version: 3.12.4
+* Operating System: MacOS
 
 ### Description
 
