@@ -19,7 +19,7 @@ CHROMA_PATH = config.file_paths.database_directory
 DATA_PATH = config.file_paths.data_directory
 
 
-def main():
+def create_vector_db():
     """
     Main function to generate the data store.
     """
@@ -43,7 +43,7 @@ def load_documents():
     Returns:
         list[Document]: A list of loaded documents.
     """
-    loader = DirectoryLoader(DATA_PATH, glob="*.md")
+    loader = DirectoryLoader(DATA_PATH, glob="*.pdf")
     documents = loader.load()
     return documents
 
@@ -67,10 +67,6 @@ def split_text(documents: list[Document]):
     chunks = text_splitter.split_documents(documents)
     print(f"Split {len(documents)} documents into {len(chunks)} chunks.")
 
-    document = chunks[10]
-    print(document.page_content)
-    print(document.metadata)
-
     return chunks
 
 
@@ -89,7 +85,3 @@ def save_to_chroma(chunks: list[Document]):
     )
     db.persist()
     print(f"Saved {len(chunks)} chunks to {CHROMA_PATH}.")
-
-
-if __name__ == "__main__":
-    main()
