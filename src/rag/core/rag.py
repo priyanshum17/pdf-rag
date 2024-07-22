@@ -28,7 +28,7 @@ def create_vector_db():
 
 def generate_data_store():
     """
-    Function to generate the data store by loading documents, splitting text, 
+    Function to generate the data store by loading documents, splitting text,
     and saving to the Chroma vector store.
     """
     documents = load_documents()

@@ -112,3 +112,9 @@ ENV/
 .DS_STORE
 *.DS_STORE
 **.DS_STORE
+
+# Ignore all files in the src/rag/assets/database directory
+src/rag/assets/database/*
+
+# Ignore all files in the src/rag/assets/data directory
+src/rag/assets/data/*

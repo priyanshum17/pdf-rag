@@ -36,5 +36,5 @@ def query(query_text):
     model = ChatOpenAI()
     response_text = model.invoke(prompt)
 
-    formatted_response = f"Response: {response_text.construct}"
+    formatted_response = f"Response: {response_text.content}"
     print(formatted_response)
