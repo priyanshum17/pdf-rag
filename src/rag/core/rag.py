@@ -59,8 +59,8 @@ def split_text(documents: list[Document]):
         list[Document]: A list of document chunks.
     """
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=300,
-        chunk_overlap=100,
+        chunk_size=800,
+        chunk_overlap=200,
         length_function=len,
         add_start_index=True,
     )
@@ -81,7 +81,9 @@ def save_to_chroma(chunks: list[Document]):
         shutil.rmtree(CHROMA_PATH)
 
     db = Chroma.from_documents(
-        chunks, OpenAIEmbeddings(), persist_directory=CHROMA_PATH
+        chunks,
+        OpenAIEmbeddings(model="text-embedding-3-large"),
+        persist_directory=CHROMA_PATH,
     )
     db.persist()
     print(f"Saved {len(chunks)} chunks to {CHROMA_PATH}.")

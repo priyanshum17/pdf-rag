@@ -9,7 +9,7 @@ def delete_all_files_in_database():
     Deletes all files and directories in the src/rag/assets/database directory.
     """
     database_path = config.file_paths.database_directory
-    
+
     if os.path.exists(database_path):
         for filename in os.listdir(database_path):
             file_path = os.path.join(database_path, filename)
@@ -23,6 +23,7 @@ def delete_all_files_in_database():
                 print(f"Failed to delete {file_path}. Reason: {e}")
     else:
         print(f"The directory {database_path} does not exist.")
+
 
 # Call the function to delete all files in the database directory
 delete_all_files_in_database()

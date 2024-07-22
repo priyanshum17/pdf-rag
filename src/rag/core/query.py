@@ -24,7 +24,7 @@ def query(query_text):
     Args:
         query_text (str): The input query text for which the response is to be generated.
     """
-    embedding_function = OpenAIEmbeddings()
+    embedding_function = OpenAIEmbeddings(model="text-embedding-3-large")
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
 
     results = db.similarity_search_with_relevance_scores(query_text, k=20)
@@ -33,7 +33,7 @@ def query(query_text):
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
 
-    model = ChatOpenAI()
+    model = ChatOpenAI(model="gpt-4o-mini")
     response_text = model.invoke(prompt)
 
     formatted_response = f"Response: {response_text.content}"
