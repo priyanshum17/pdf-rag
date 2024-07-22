@@ -1,14 +1,17 @@
 import os
 from dotenv import load_dotenv
+
 import openai
 from langchain_openai import OpenAI
 from langchain_experimental.agents.agent_toolkits import create_csv_agent
 
-# Load environment variables from .env file
+from src.rag.core.configuration import config
+
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-CHROMA_PATH = "src/rag/assets/docs"
+DOCS_PATH = config.file_paths.document_directory
+
 
 def get_csv_files(directory_path):
     """
@@ -25,6 +28,7 @@ def get_csv_files(directory_path):
         if filename.endswith(".csv"):
             csv_files.append(os.path.join(directory_path, filename))
     return csv_files
+
 
 class CSVReader:
     def __init__(self, file_path):
@@ -51,6 +55,7 @@ class CSVReader:
         """
         return self.agent.run(question)
 
+
 def query_csv(query: str):
     """
     Queries the first CSV file found in the specified directory and prints the result.
@@ -58,7 +63,7 @@ def query_csv(query: str):
     Parameters:
     - query (str): The question to be asked about the CSV data.
     """
-    directory_path = CHROMA_PATH
+    directory_path = DOCS_PATH
 
     csv_files = get_csv_files(directory_path)
 
